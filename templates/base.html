@@ -25,11 +25,18 @@
     </nav> {% endcomment %}
     <nav class="navbar bg-light">
         <div class="container-fluid">
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
+            <li>
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url 'App_Login:signup' %}">Signup</a>
+            </li>
         </div>
       </nav>
 
-    {% block body_block %} {% endblock %}
+    <div class="container" style="padding-top: 20px;">
+        {% block body_block %} {% endblock %}
+    </div>
     
 </body>
 </html>

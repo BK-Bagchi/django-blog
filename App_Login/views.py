@@ -1,6 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 
-def Index(request):
-    return HttpResponse("App Login page")
+def sign_up(request):
+    form = UserCreationForm
+    registered = False
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            registered = True
+
+    dict = {'form': form, 'registered': registered}
+    return render(request, 'App_Login/signup.html', context=dict)
