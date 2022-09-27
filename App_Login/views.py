@@ -4,13 +4,14 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from .forms import SignUpForm
 
 
 def sign_up(request):
-    form = UserCreationForm
+    form = SignUpForm
     registered = False
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = SignUpForm(data=request.POST)
         if form.is_valid():
             form.save()
             registered = True
