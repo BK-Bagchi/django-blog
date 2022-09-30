@@ -3,6 +3,14 @@
 {% block body_block %}
 
 <h2>Your Profile</h2>
+{% if user.user_profile %}
+    <img class="rounded-cricle" width="100px" src="/media/{{user.user_profile.profile_pics}}" alt="Profile Picture User">
+    <a href="{% url 'App_Login:change_pro_pic' %}" class="btn btn-info btn-sm">Change Profile Picture</a>
+{% else %}
+    <img class="rounded-cricle" width="100px" src="/media/profile_pics/avatar-female.png" alt="Profile Picture Default" />
+    <a href="{% url 'App_Login:add_pro_pic' %}" class="btn btn-info btn-sm">Change Profile Picture</a>
+{% endif %}
+
 <p>Username: {{user.username}}</p>
 <p>Email: {{user.email}}</p>
 <p>Name: {{user.first_name}} {{user.last_name}}</p>

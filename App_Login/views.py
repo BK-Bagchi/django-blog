@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UserProfileChange
+from .forms import SignUpForm, UserProfileChange, ProfilePic
 
 
 def sign_up(request):
@@ -72,3 +72,29 @@ def pass_change(request):
             changed = True
 
     return render(request, 'App_Login/change_pass.html', context={'form': form, 'changed': changed})
+
+
+@login_required
+def add_pro_pic(request):
+    form = ProfilePic()
+    if request.method == 'POST':
+        form = ProfilePic(request.POST, request.FILES)
+        if form.is_valid():
+            user_obj = form.save(commit=False)
+            user_obj.user = request.user
+            user_obj.save()
+            return HttpResponseRedirect(reverse('App_Login:profile'))
+
+    return render(request, 'App_Login/pro_pic_add.html', context={'form': form})
+
+
+def change_pro_pic(request):
+    form = ProfilePic(instance=request.user.user_profile)
+    if request.method == 'POST':
+        form = ProfilePic(request.POST, request.FILES,
+                          instance=request.user.user_profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('App_Login:profile'))
+
+    return render(request, 'App_Login/pro_pic_add.html', context={'form': form})
