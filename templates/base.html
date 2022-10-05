@@ -29,8 +29,8 @@
                     {{user.username}}
                 </a>
                 <div class="dropdown-menu">
-                {% comment %} <a class="dropdown-item" href="{% url 'App_Blog:create_blog' %}">Write Blog</a>
-                <a class="dropdown-item" href="{% url 'App_Blog:my_blogs' %}">My Blogs</a> {% endcomment %}
+                <a class="dropdown-item" href="{% url 'App_Blog:create_blog' %}">Write Blog</a>
+                {% comment %} <a class="dropdown-item" href="{% url 'App_Blog:my_blogs' %}">My Blogs</a> {% endcomment %}
                 <a class="dropdown-item" href="{% url 'App_Login:profile' %}">Your Profile</a>
                 <hr>
                 <a class="dropdown-item" href="{% url 'App_Login:logout' %}">Logout</a>
@@ -50,6 +50,5 @@
     <div class="container" style="padding-top: 20px;">
         {% block body_block %} {% endblock %}
     </div>
-    
 </body>
 </html>
