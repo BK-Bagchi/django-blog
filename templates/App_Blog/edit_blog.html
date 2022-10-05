@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
-{% block title_block %} Edit Blog {% endblock %}
-{% block body_block %} 
-    
+{% load crispy_forms_tags %}
+{% block title_block %} {{blog.blog_title}} {% endblock %}
+{% block body_block %}
+{% if blog.author == user %}
+<form method="POST">
+    {{form|crispy}}
+    {% csrf_token %}
+<button type="submit" name="button" class="btn btn-success">Update</button>
+{% else %}
+<div class="alert alert-danger">
+    <p>Your are not allowed to view this page. 404</p>
+</div>
+</form>
+{% endif %}
 {% endblock %}
